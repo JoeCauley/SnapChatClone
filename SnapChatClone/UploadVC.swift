@@ -69,9 +69,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                             
                             let fireStore = Firestore.firestore()
                             
-                            let snapDict = ["imageUrl" : imageUrl!, "snapOwner" : UserSingleton.SharedUserInfo.userName , "date" : FieldValue.serverTimestamp()] as [String : Any]
-                            
-                            fireStore.collection("Snaps").addDocument(data: snapDict) { (error) in
+                            fireStore.collection("Snaps").whereField("snapOwner", isEqualTo: UserSingleton.SharedUserInfo.userName).getDocuments { (snapShot, error) in
                                 
                                 if error != nil {
                                     
@@ -79,8 +77,50 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                     
                                 } else {
                                     
-                                    self.tabBarController?.selectedIndex = 0
-                                    self.uploadImageView.image = UIImage(named: "selectImage")
+                                    if snapShot?.isEmpty == false && snapShot != nil {
+                                        
+                                        for document in snapShot!.documents {
+                                            
+                                            let documentID = document.documentID
+                                            
+                                            if var imageUrlArray = document.get("imageUrlArray") as? [String] {
+                                                
+                                                imageUrlArray.append(imageUrl!)
+                                                
+                                                let additionalDict = ["imageUrlArray" : imageUrlArray] as [String : Any]
+                                                
+                                                fireStore.collection("Snaps").document(documentID).setData(additionalDict, merge: true) { (error) in
+                                                    
+                                                        if error == nil {
+                                                            
+                                                            self.tabBarController?.selectedIndex = 0
+                                                            self.uploadImageView.image = UIImage(named: "selectImage")
+                                                        
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        
+                                    } else {
+                                        
+                                        let snapDict = ["imageUrlArray" : [imageUrl!], "snapOwner" : UserSingleton.SharedUserInfo.userName , "date" : FieldValue.serverTimestamp()] as [String : Any]
+                                        
+                                        fireStore.collection("Snaps").addDocument(data: snapDict) { (error) in
+                                            
+                                            if error != nil {
+                                                
+                                                self.userAlert(titleText: "Image Upload Error!", messageText: error?.localizedDescription ?? "Unknown Error")
+                                                
+                                            } else {
+                                                
+                                                self.tabBarController?.selectedIndex = 0
+                                                self.uploadImageView.image = UIImage(named: "selectImage")
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
                                 }
                                 
                             }
@@ -94,6 +134,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             }
             
         }
+        
     }
     
     func userAlert (titleText : String, messageText : String) {
