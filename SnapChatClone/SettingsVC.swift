@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SettingsVC: UIViewController {
 
@@ -18,7 +19,20 @@ class SettingsVC: UIViewController {
     
     @IBAction func logoutButton(_ sender: Any) {
         
-        performSegue(withIdentifier: "toDignInVC", sender: nil)
+        do {
+            
+            try Auth.auth().signOut()
+            
+        } catch {
+            
+            let alert = UIAlertController(title: "Sign Out Error!", message: "Unknown Error", preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+            alert.addAction(okButton)
+            self.present(alert, animated: true)
+            
+        }
+        
+        performSegue(withIdentifier: "toSIgnInVC", sender: nil)
         
     }
     

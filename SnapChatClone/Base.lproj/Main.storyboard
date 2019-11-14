@@ -87,7 +87,7 @@
                         <outlet property="emailText" destination="oRM-Bd-dX4" id="hM7-6O-J7e"/>
                         <outlet property="passWordText" destination="zAz-1u-Frh" id="uhy-Li-GbP"/>
                         <outlet property="userNameText" destination="f3H-UR-nKW" id="1dI-mb-alN"/>
-                        <segue destination="gFu-kK-f6K" kind="presentation" identifier="toTabBar" modalPresentationStyle="fullScreen" id="go1-Kh-mBz"/>
+                        <segue destination="gFu-kK-f6K" kind="presentation" identifier="toFeedVC" modalPresentationStyle="fullScreen" id="go1-Kh-mBz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

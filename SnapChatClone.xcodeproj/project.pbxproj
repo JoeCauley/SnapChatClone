@@ -19,6 +19,7 @@
 		F9D71FFB237C402800D8B5AC /* SnapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D71FFA237C402800D8B5AC /* SnapVC.swift */; };
 		F9D71FFD237C408900D8B5AC /* UploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D71FFC237C408800D8B5AC /* UploadVC.swift */; };
 		F9D71FFF237C40F900D8B5AC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D71FFE237C40F900D8B5AC /* SettingsVC.swift */; };
+		F9D72001237C822C00D8B5AC /* UserSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D72000237C822C00D8B5AC /* UserSingleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		F9D71FFA237C402800D8B5AC /* SnapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapVC.swift; sourceTree = "<group>"; };
 		F9D71FFC237C408800D8B5AC /* UploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadVC.swift; sourceTree = "<group>"; };
 		F9D71FFE237C40F900D8B5AC /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		F9D72000237C822C00D8B5AC /* UserSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSingleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			children = (
 				F92909CF237B796B00A18AFF /* AppDelegate.swift */,
 				F92909D1237B796B00A18AFF /* SceneDelegate.swift */,
+				F9D72000237C822C00D8B5AC /* UserSingleton.swift */,
 				F92909D3237B796B00A18AFF /* SignInVC.swift */,
 				F9D71FF8237C3F1E00D8B5AC /* FeedVC.swift */,
 				F9D71FFA237C402800D8B5AC /* SnapVC.swift */,
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9D72001237C822C00D8B5AC /* UserSingleton.swift in Sources */,
 				F9D71FF9237C3F1E00D8B5AC /* FeedVC.swift in Sources */,
 				F9D71FFD237C408900D8B5AC /* UploadVC.swift in Sources */,
 				F92909D4237B796B00A18AFF /* SignInVC.swift in Sources */,

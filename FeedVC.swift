@@ -7,27 +7,45 @@
 //
 
 import UIKit
+import Firebase
 
 class FeedVC: UIViewController {
     
     @IBOutlet var feedTableView: UITableView!
     
+    let fireStoreDB = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        getUserInfo()
+    }
+
+    func getUserInfo() {
+        
+        fireStoreDB.collection("userInfo").whereField("email", isEqualTo: Auth.auth().currentUser!.email!).getDocuments { (snapshot, error) in
+            if error != nil {
+                self.userAlert(titleText: "Error", messageText: error?.localizedDescription ?? "Error")
+            } else {
+                if snapshot?.isEmpty == false && snapshot != nil {
+                    for document in snapshot!.documents {
+                        if let username = document.get("username") as? String {
+                            UserSingleton.SharedUserInfo.email = Auth.auth().currentUser!.email!
+                            UserSingleton.SharedUserInfo.userName = username
+                        }
+                    }
+                }
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func userAlert (titleText : String, messageText : String) {
+        
+        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true)
+        
     }
-    */
 
 }
